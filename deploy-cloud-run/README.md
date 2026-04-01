@@ -17,30 +17,6 @@ Obtém o clima pelo CEP.
 }
 ```
 
-**Resposta (CEP Inválido - 422):**
-```json
-{
-  "message": "invalid zipcode"
-}
-```
-
-## Configuração
-
-A API requer uma chave da WeatherAPI para funcionar. Você pode configurar a variável de ambiente `WEATHER_API_KEY` das seguintes formas:
-
-
-### Variável de Ambiente
-
-**Linux/Mac:**
-```bash
-export WEATHER_API_KEY="c91bb5c1e81042c9aa2145223260104"
-```
-
-**Windows (CMD):**
-```bash
-set WEATHER_API_KEY="c91bb5c1e81042c9aa2145223260104"
-```
-
 ## Execução Local
 
 1. Instale as dependências:
@@ -48,38 +24,23 @@ set WEATHER_API_KEY="c91bb5c1e81042c9aa2145223260104"
 go mod tidy
 ```
 
-2. Defina a chave da WeatherAPI:
+2. Execute o servidor:
 ```bash
-export WEATHER_API_KEY=c91bb5c1e81042c9aa2145223260104
+$env:WEATHER_API_KEY="c91bb5c1e81042c9aa2145223260104"; go run main.go
 ```
 
-3. Execute o servidor:
-```bash
-go run main.go
-```
-
-4. Teste a API:
+3. Teste a API:
 ```bash
 curl http://localhost:8080/health
 curl http://localhost:8080/weather/01310930
 ```
 
+## URL de Acesso Google Cloud Run
+
+https://deploy-weather-156587497249.southamerica-east1.run.app/weather/89031070
+
 ## Executando os Testes
 
 ```bash
 go test ./... -v
-```
-
-## Docker
-
-### Construindo a Imagem
-
-```bash
-docker build -t weather-cep .
-```
-
-### Executando com Docker
-
-```bash
-docker run -p 8080:8080 -e WEATHER_API_KEY=sua_chave_aqui weather-cep
 ```
